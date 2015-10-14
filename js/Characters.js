@@ -1,5 +1,6 @@
 game = game || {};
 game.characters = (function() {
+  /*var player = game.entity.create(40,67,  45,67, 0, 3, "player", "images/toribio.png"),*/
   var player = game.entity.create(44,60,  44,60, 0, 3, "player", "images/personaje.png"),
       wall = game.entity.create(30,30,  0,200, 0, 3, "ground", "images/tiles-ground-1.png");
 
