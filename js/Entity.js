@@ -23,7 +23,7 @@ game.entity = (function() {
       totalFrames: totalFrames,
       falling: false,
 
-      type: type,
+      typeCharacter: type,
       imgUrl: imgUrl || null,
 
       draw : function(frame) {

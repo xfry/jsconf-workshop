@@ -5,33 +5,66 @@ game.start = (function(){
 
   var entities = [],
       x = 0, y = 0;
-  var player = game.characters.player,
-      wall = game.characters.wall;
+  var player = game.characters.player;
 
-  entities.push(player, wall);
+  entities.push(player);
   //mainLoop
   //animacion basada en tiempo
   var dt = 0.0,
-      dt_fijo = 1000/60, //delta time maximo
+      dt_fijo = 1000/30, //delta time maximo
       currentTime = Date.now(),
       lastTime = 0.0,
       accumulator = 0.0;
   
+  var tileX = 0,
+      newGround; 
+  
+  var createGround = function() {
+    for(var i = 0; i < 20; i++) {
+      tileX+=30;
+      newGround = game.entity.create(30,30,  tileX,300, 0, 3, "ground", "images/tiles-ground-1.png")
+      entities.push(newGround);
+    }
+  };
+
+  var update = function(dt) {
+    for(var i = 0; i < entities.length; i ++) {
+      entities[i].update(dt);
+    }
+  };
+
+  var draw = function() {
+    for(var i = 0; i < entities.length; i ++) {
+      entities[i].draw(entities[i].frame);
+    }
+  };
+
+  var updateInputs = function() {
+    for(var i = 0; i < entities.length; i ++) {
+      if(entities[i].typeCharacter === "player") {
+        entities[i].move();
+      }
+    }
+  };
+
+  createGround();
+
   var gameLoop = function() {
     lastTime = currentTime;
     currentTime = Date.now();
     dt = currentTime - lastTime; //Delta time es la diferencia entre currentTime y LastTime
     accumulator += dt;
-    
+
     //tiempo fijo conun limite
     if(accumulator >= dt_fijo) {
-      for(var i = 0; i < entities.length; i ++) {
-        entities[i].update(dt_fijo);
-        entities[i].draw(entities[i].frame);
-      }
+      accumulator -= dt_fijo;
+      
+      updateInputs();
+      update(dt);
+      draw();
+
       //limpiar el lienzo
       game.setup.ctx.clearRect(0,0, game.setup.canvas.width, game.setup.canvas.height);
-      accumulator -= dt_fijo;
     }
 
     setTimeout(gameLoop, 1000/30);
