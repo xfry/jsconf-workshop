@@ -18,10 +18,14 @@ game.entity = (function() {
         x: posX,
         y: posY
       },
+      
+      vx: 0,
+      vy: 0,
 
       frame: frame,
       totalFrames: totalFrames,
       falling: false,
+      flipPlayer: false,
 
       typeCharacter: type,
       imgUrl: imgUrl || null,
@@ -47,7 +51,6 @@ game.entity = (function() {
               self.position.x, self.position.y,
               self.spriteW, self.spriteH);
           };
-
         }
       },
 

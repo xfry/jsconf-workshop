@@ -10,7 +10,7 @@ game.input = (function(){
   };
 
   setAction(37, "move-left");
-  setAction(38, "move-up");
+  setAction(32, "move-up");
   setAction(39, "move-right");
 
   var keyDown = function(even) {
@@ -18,7 +18,6 @@ game.input = (function(){
     var keyId = even.keyCode;
     var action = bindings[keyId];
     actions[action] = (keyMap[keyId] = true);
-    console.log(actions[action]);
   };
 
   var keyUp = function(even) {
@@ -27,7 +26,6 @@ game.input = (function(){
     var keyId = even.keyCode;
     var action = bindings[keyId];
     actions[action] = (keyMap[keyId] = false);
-    console.log(actions[action]);
   };
 
   //registramos los eventos
