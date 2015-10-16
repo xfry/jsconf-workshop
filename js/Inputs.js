@@ -16,6 +16,7 @@ game.input = (function(){
   var keyDown = function(even) {
     even.preventDefault();
     var keyId = even.keyCode;
+    console.log('input '+ keyId);
     var action = bindings[keyId];
     actions[action] = (keyMap[keyId] = true);
   };
